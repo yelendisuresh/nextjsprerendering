@@ -26,13 +26,16 @@ export async function getServerSideProps(context) {
     params: { category },
     req,
     res,
+    query,
   } = context;
-  console.log("category", req.headers.cookie);
+  console.log("category", context.req.headers.cookie);
+  console.log("qurry", query);
+  res.setHeader("set-Cookie", ["name=Suresh"]);
   const response = await fetch(
     `http://localhost:4000/news?category=${category}`
   );
   const data = await response.json();
-  console.log("data", data);
+  console.log(`Pre-rendering News Articles for category ${category}`);
   return {
     props: {
       articles: data,
