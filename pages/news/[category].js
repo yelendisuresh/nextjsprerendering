@@ -24,9 +24,10 @@ export default ArticleListByCategory;
 export async function getServerSideProps(context) {
   const {
     params: { category },
+    req,
+    res,
   } = context;
-  //   const { category } = { params };
-  console.log("category", context);
+  console.log("category", req.headers.cookie);
   const response = await fetch(
     `http://localhost:4000/news?category=${category}`
   );
